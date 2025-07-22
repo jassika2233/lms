@@ -37,7 +37,7 @@
                     @media (max-width:768px) {
                         display: none;
                     }
-                };
+                }
             }
         }
     }
@@ -47,4 +47,4 @@
     display: flex;
     min-height: 80vh;
     margin-top: 20px;
-}
+} 

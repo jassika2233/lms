@@ -16,6 +16,7 @@ const Register = () => {
 
   return (
     <div className="auth-page">
+      <h1 className='bg-red-500'>jgeukwygf</h1>
         <div className="auth-form">
             <h2>Register</h2>
             <form onSubmit={submitHandler}>
