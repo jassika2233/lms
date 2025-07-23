@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import './dasboard.css'
+
 import { useNavigate } from 'react-router-dom'
-import Layout from '../Utils/Layout';
+import Layout from './Utils/Layout';
 import { useState } from 'react';
 import axios from 'axios';
-import { server } from '../../main';
+import { server } from '../main';
 
 const AdminDashboard = ({user}) => {
     const navigate= useNavigate()

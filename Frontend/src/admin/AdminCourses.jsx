@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import './adminc.css'
-import Layout from '../Utils/Layout'
+
+import Layout from './Utils/Layout'
 import { useNavigate } from 'react-router-dom';
-import { CourseData } from '../../context/CourseContext';
-import CourseCard from '../../components/coursecard/CourseCard';
+import { CourseData } from '../context/CourseContext';
+import CourseCard from '../components/CourseCard';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { server } from '../../main';
+import { server } from '../main';
 
 const categories =[
     "Web Development",

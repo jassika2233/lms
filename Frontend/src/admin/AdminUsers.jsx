@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import './admins.css'
+
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { server } from '../../main'
-import Layout from '../Utils/Layout'
+import { server } from '../main'
+import Layout from './Utils/Layout'
 import toast from 'react-hot-toast'
 
 

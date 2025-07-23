@@ -1,8 +1,8 @@
 import React from 'react'
-import './account.css'
+
 import { MdDashboard } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
-import { UserData } from '../../context/UserContext';
+import { UserData } from '../context/UserContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 

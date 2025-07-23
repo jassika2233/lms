@@ -1,11 +1,11 @@
 import React from 'react'
-import './coursecard.css'
-import { server } from '../../main'
-import { UserData } from '../../context/UserContext'
+
+import { server } from '../main'
+import { UserData } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { CourseData } from '../../context/CourseContext'
+import { CourseData } from '../context/CourseContext'
 
 
 const CourseCard = ({course}) => {

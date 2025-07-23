@@ -1,5 +1,5 @@
 import React from 'react'
-import './footer.css'
+
 import { AiFillFacebook } from "react-icons/ai";
 import { AiFillTwitterSquare } from "react-icons/ai";
 import { AiFillInstagram } from "react-icons/ai";

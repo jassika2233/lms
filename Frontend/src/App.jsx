@@ -1,25 +1,25 @@
 import React from 'react'
 import "./App.css";
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Home from './pages/home/Home';
-import Header from './components/header/Header';
+import Home from './pages/Home';
+import Header from './components/Header';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Verify from './pages/auth/Verify';
-import Footer from './components/footer/Footer';
-import About from './pages/about/About';
-import Account from './pages/account/Account';
+import Footer from './components/Footer';
+import About from './pages/About';
+import Account from './pages/Account';
 import { UserData } from './context/UserContext';
-import Loading from './components/loading/Loading';
-import Courses from './pages/courses/Courses';
-import CourseDescription from './pages/CourseDescription/CourseDescription';
-import PaymentSuccess from './pages/paymentsuccess/PaymentSuccess';
-import Dashboard from './pages/dashboard/Dashboard';
-import CourseStudy from './pages/coursestudy/courseStudy';
-import Lecture from './pages/lecture/Lecture';
-import AdminDashboard from './admin/Dashboard/AdminDashboard';
-import AdminCourses from './admin/Courses/AdminCourses';
-import AdminUsers from './admin/Users/AdminUsers';
+import Loading from './components/Loading';
+import Courses from './pages/Courses';
+import CourseDescription from './pages/CourseDescription';
+import PaymentSuccess from './pages/PaymentSuccess';
+import Dashboard from './pages/Dashboard';
+import CourseStudy from './pages/CourseStudy';
+import Lecture from './pages/Lecture';
+import AdminDashboard from './admin/AdminDashboard';
+import AdminCourses from './admin/AdminCourses';
+import AdminUsers from './admin/AdminUsers';
 
 
 

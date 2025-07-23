@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import  './lecture.css'
+
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { server } from '../../main'
-import Loading from '../../components/loading/Loading'
+import { server } from '../main'
+import Loading from '../components/Loading'
 import toast from 'react-hot-toast'
 
 const Lecture = ({user}) => {
