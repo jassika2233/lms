@@ -1,13 +1,26 @@
 "use client"
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { UserData } from "../context/UserContext"
+import { IoMdLogOut } from "react-icons/io"
+import toast from "react-hot-toast"
 
-const Header = ({ isAuth }) => {
+const Header = ({ isAuth, user }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { setIsAuth, setUser } = UserData()
+  const navigate = useNavigate()
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const logoutHandler = () => {
+    localStorage.clear()
+    setUser([])
+    setIsAuth(false)
+    toast.success("Logged Out")
+    navigate("/login")
   }
 
   return (
@@ -25,60 +38,51 @@ const Header = ({ isAuth }) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50"
-            >
+            <Link to="/" className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50">
               Home
             </Link>
-            <Link
-              to="/courses"
-              className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50"
-            >
+            <Link to="/courses" className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50">
               Courses
             </Link>
-            <Link
-              to="/about"
-              className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50"
-            >
+            <Link to="/about" className="text-slate-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-slate-50">
               About
             </Link>
 
-            {/* Auth-based Navigation */}
             {isAuth ? (
-              <Link
-                to="/account"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                Account
-              </Link>
+              <>
+                <Link to="/account" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  {user?.name || "Account"}
+                </Link>
+
+                <button
+                  onClick={logoutHandler}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center"
+                >
+                  <IoMdLogOut className="mr-2" />
+                  Logout
+                </button>
+              </>
             ) : (
               <div className="flex items-center space-x-3">
-                <Link
-                  to="/login"
-                  className="text-slate-700 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 hover:bg-slate-50 border border-slate-300 hover:border-blue-300"
-                >
+                <Link to="/login" className="text-slate-700 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 hover:bg-slate-50 border border-slate-300 hover:border-blue-300">
                   Sign In
                 </Link>
-                <Link
-                  to="/register"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                >
+                <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                   Sign Up
                 </Link>
               </div>
             )}
           </nav>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Toggle */}
           <div className="md:hidden">
             <button
               onClick={toggleMobileMenu}
@@ -102,60 +106,39 @@ const Header = ({ isAuth }) => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-slate-200 bg-white">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                to="/"
-                className="text-slate-700 hover:text-blue-600 hover:bg-slate-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+              <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition" onClick={toggleMobileMenu}>
                 Home
               </Link>
-              <Link
-                to="/courses"
-                className="text-slate-700 hover:text-blue-600 hover:bg-slate-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+              <Link to="/courses" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition" onClick={toggleMobileMenu}>
                 Courses
               </Link>
-              <Link
-                to="/about"
-                className="text-slate-700 hover:text-blue-600 hover:bg-slate-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+              <Link to="/about" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition" onClick={toggleMobileMenu}>
                 About
               </Link>
 
-              {/* Mobile Auth Navigation */}
               <div className="pt-2 border-t border-slate-200 space-y-2">
                 {isAuth ? (
-                  <Link
-                    to="/account"
-                    className="bg-blue-600 hover:bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 flex items-center"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    Account
-                  </Link>
+                  <>
+                    <Link to="/account" className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition" onClick={toggleMobileMenu}>
+                      Account
+                    </Link>
+                    <button
+                      onClick={() => {
+                        toggleMobileMenu()
+                        logoutHandler()
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-red-600 text-white hover:bg-red-700 transition flex items-center"
+                    >
+                      <IoMdLogOut className="mr-2" />
+                      Logout
+                    </button>
+                  </>
                 ) : (
                   <>
-                    <Link
-                      to="/login"
-                      className="text-slate-700 hover:text-blue-600 hover:bg-slate-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 border border-slate-300"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                    <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition border border-slate-300" onClick={toggleMobileMenu}>
                       Sign In
                     </Link>
-                    <Link
-                      to="/register"
-                      className="bg-blue-600 hover:bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                    <Link to="/register" className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition" onClick={toggleMobileMenu}>
                       Sign Up
                     </Link>
                   </>
